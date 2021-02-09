@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const APP_SECRET = 'GraphQL-is-aw3some'
+const {ApolloError} = require('apollo-server-core')
 
 function getTokenPayload(token) {
   return jwt.verify(token, APP_SECRET)
@@ -20,7 +21,7 @@ function getUserId(req, authToken) {
     return userId
   }
 
-  throw new Error('Not authenticated')
+  throw new ApolloError('Not authenticated')
 }
 
 module.exports = {

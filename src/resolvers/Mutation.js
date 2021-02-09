@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const {ApolloError} = require('apollo-server-core')
 const {APP_SECRET, getUserId} = require('../utils')
 
 async function signup(parent, args, context, info) {
@@ -11,10 +12,10 @@ async function signup(parent, args, context, info) {
 
 async function login(parent, args, context, info) {
   const user = await context.prisma.user.findUnique({where: {email: args.email}})
-  if (!user) throw new Error('No such user found')
+  if (!user) throw new ApolloError('No such user found')
 
   const valid = await bcrypt.compare(args.password, user.password)
-  if (!valid) throw new Error('Invalid password!')
+  if (!valid) throw new ApolloError('Invalid password!')
 
   const token = jwt.sign({userId: user.id}, APP_SECRET)
 
@@ -34,7 +35,7 @@ async function vote(parent, args, context, info) {
   })
 
   if (Boolean(vote)) {
-    throw new Error(`Already voted for link: ${args.linkId}`)
+    throw new ApolloError(`Already voted for link: ${args.linkId}`)
   }
 
   const newVote = context.prisma.vote.create({
