@@ -1,11 +1,21 @@
 ## About this App
 
-GraphQL-node tutorial project from [HowToGraphQl](https://github.com/howtographql/howtographql)
+GraphQL-node tutorial project from [HowToGraphQl](https://github.com/howtographql/howtographql), which is the backend using GraphQL, Apollo, and Prisma for [hackernews-react-apollo](https://github.com/FelixPriori/hackernews-react-apollo) which is a clone of the hackernews website.
 
-## to start project in development mode:
+## to setup the project project:
 
 ```shell
-yarn && yarn start
+yarn
+npx prisma generate
+npx prisma migrate dev --preview-feature
+```
+
+## to start the project in development mode
+
+```shell
+yarn start
+npx prisma generate
+npx prisma migrate dev --preview-feature
 ```
 
 Then navigate to localhost:4000
