@@ -14,8 +14,6 @@ npx prisma migrate dev --preview-feature
 
 ```shell
 yarn start
-npx prisma generate
-npx prisma migrate dev --preview-feature
 ```
 
 Then navigate to localhost:4000
